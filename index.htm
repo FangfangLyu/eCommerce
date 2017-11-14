@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Daisy's</title>
+
+        <style>
+            /*give a background color*/
+            body{
+                background-color:#ffe6b3;
+                padding:0;
+                margin:0;
+            }
+            /*give a background color to items and the size.*/
+            div.fruit{
+                background-color:#ff9900;
+                width: 600px;
+                height:800px;
+                text-align: center;
+            }
+            /*when the item hover by mouse the backgrund color changed.*/
+            div.fruit:hover{
+                background-color:#cc7a00;
+            }
+
+            /*give the checkout button a color and a bigger font-size*/
+            #check{
+                background-color:gold;
+                font-size: 32px;
+            }
+
+            /*when the checkout button hover by mouse the color of the background and text change*/
+            #check:hover{
+                background-color:crimson;
+                color: white;
+            }
+            /*the box that left for the checkout
+              set a background color,size,and where put the box*/
+            #checkbg{
+                background-color: #ff9900;
+                width:540px;
+                height:770px;
+                padding:15px 30px;
+                margin-top:75px;
+                margin-left:900px;
+                font-size: 24px;
+            }
+            /*when the mouse hover the box left for checkout,the bgcolor will change*/
+            #checkbg:hover{
+                background-color: #cc7a00;
+              }
+        </style>
+
+        <script>
+        /*Fangfang Lyu
+        Date:11/10/2017
+        Task: E-commerce project
+        */
+        function checkout(){
+            //declar two variable for two different output:customer details and company details
+            var output=document.getElementById("output");
+            var output2=document.getElementById("output2");
+            //get the value that user types for each item
+            var q1=parseInt(document.getElementById("q1").value);
+            var q2=parseInt(document.getElementById("q2").value);
+            var q3=parseInt(document.getElementById("q3").value);
+            //calc the customer's subtotal
+            var customerSubtotal=10 * q1 + 15 * q2 + 25 * q3;
+            //calc the company subtotal
+            var companySubtotal=5 * q1 + 5 * q2 + 8 * q3;
+			//calc the tax
+			var tax = customerSubtotal * (8.875/100);
+            //calc the toal items that was sold
+			var totalItemsSold = q1+q2+q3;
+            //use if statement to determine the shipping cost based on customer's cost
+			var shipping = 0;
+			if (customerSubtotal==0 && totalItemsSold==0){
+                shipping=0;
+            }else if(customerSubtotal <100&&customerSubtotal>0){
+				shipping += 25;
+			}else if (customerSubtotal >= 100 && customerSubtotal<=200){
+				shipping += 10;
+			}else if(customerSubtotal>200){
+				shipping += 0;
+			}
+            var offer=0;
+            if (customerSubtotal>50&&customerSubtotal<=100){
+                offer=5;
+            }else if(customerSubtotal>100&&customerSubtotal<=200){
+                offer=20;
+            }else if(customerSubtotal>200){
+                offer=50;
+            }
+            //calc the profit the company will make in the deal
+			var profit = customerSubtotal - companySubtotal - offer;
+			//calc the total money the user need to pay
+			var totalMoney = customerSubtotal + tax + shipping - offer;
+			//declar an variable named op that will become the innerHTML for the output(customer details)
+			var op= "";
+            op+="<h3>CUSTOMER ORDER DETAILS</h3>";
+            op+="<pre>"
+            op+="Items:" + (10*q1)+" apples,"+ (10*q2)+" peaches,"+(10*q3)+" pomegranates.";
+            op+="<br>Subtotal:                         +$"+ customerSubtotal.toFixed(2);
+            op+="<br>Tax(8.875%):                      +$"+ tax.toFixed(2);
+            op+="<br>Shipping & Handling:              +$"+shipping.toFixed(2);
+            op+="<br>Special Offer:                    -$"+offer;
+            op+="<br>Customer Total:                   =$"+totalMoney.toFixed(2);
+            op+="<br>---------------------------------"
+            //declar another variable named op that will become the innerHTML for the output2(company details)
+            var op2="";
+            op2+="<h3>ORDER DETAILS FOR COMPANY</h3>";
+            op2+="<pre>";
+            op2+="Items Sold:  " + (10*q1)+" apples,"+ (10*q2)+" peaches,"+(10*q3)+" pomegranates.";
+            op2+="<br>Customer Subtotal:                  $"+ customerSubtotal.toFixed(2);
+            op2+="<br>Company Subtotal:                   $"+ companySubtotal.toFixed(2);
+            op2+="<br>Special Offer:                     -$"+offer;
+            op2+="<br>Profit/Loss:                       =$"+profit.toFixed(2);
+            //assign op&op2 to the outputs' innerHTML 
+			output.innerHTML = op;
+            output2.innerHTML = op2;
+		}
+        </script>
+    </head>
+
+
+    <body>
+        <!-- create a div for the title,daisy's fruits shop -->
+        <div id="title" style="background-color:#3f2707;padding:20px;margin:auto;text-align:center">
+            <!-- insert my logo image -->
+            <img src="logo.png" alt="logo" title="Daisy's" style="background-color:#ffe6b3">
+            <!-- add the store name and style it insider the tag.(the font size and the text align) -->
+            <span id=offer style= "font-size:70px;text-align:center;color:#ffe6b3"><b>Daisy's Fruits Shop</b></span>
+        </div>
+        <br>
+        <div class=offer style="background-color:rgb(110, 52, 13);text-align:center">
+            <br>
+            <img src=offer2.png  style="width:100px">
+            <b id="offer" style="font-size:40px;color:rgb(224, 189, 125);">Get $5 off when order is over $50</b>
+        </div>
+
+        <div class=offer style="background-color:rgb(168, 88, 14);text-align:center">
+            <br>
+            <img src=offer2.png  style="width:100px">
+            <b id="offer" style="font-size:40px;color:rgb(238, 208, 151);">Get $20 off when order is over $100</b>
+        </div>
+        <div class=offer style="background-color:rgb(199, 100, 19);text-align:center">
+            <br>
+            <img src=offer2.png  style="width:100px">
+            <b id="offer" style="font-size:40px;color:wheat";>Get $50 off when order is over $200</b>
+        </div>
+        <!-- this is a section for one item:apple -->
+        <div class="fruit" style="margin-left:150px;position:absolute;margin-top:50px">
+            <!-- insert the apple image and put some property of the element -->
+            <img src="apple.png" title="Apple" alt="Apple" height="400px" style="margin-top:50px"> 
+            <br>
+            <!-- this is the description for my item(the price and name) -->
+            <b style="font-size: 45px;">Apple</b>
+            <p style="font-size: 30px;">10ct for $10</p>
+            <!--add a span section for the input from the user-->
+            <span style="font-size:30px;background-color:rgb(44, 26, 13);color:aliceblue;">
+                Enter the quantity:  
+                <!-- create a number type input box,give it an id,minimum value and value. -->
+                <input id=q1 style="width:50px;font-size:25px;" type="number" min="0" value=0>
+            </span>
+        </div>
+         <br>
+         <!-- peach -->
+        <div class="fruit" style="text-align: center;position:relative;margin-left:900px;margin-top:25px">
+            <!-- inset img -->
+            <img src="peach.png" title="Peach" alt="Peach" height="400px" style="margin-top:50px">
+            <br>
+            <!-- add description -->
+            <b style="font-size: 45px">Peach</b>
+            <p style="font-size: 30px;">10ct for $15</p>
+            <span style="font-size:30px;background-color:rgb(44, 26, 13);color:aliceblue;">
+                Enter the quantity:  
+                <!-- number type input box -->
+                <input id=q2 style="width:50px;font-size:25px;" type="number" min="0" value=0>
+            </span>
+        </div>
+        <br>
+        <!-- pomegranate -->
+        <div class="fruit" style="text-align:center;margin-left:150px;margin-top:100px;position:absolute;">
+            <!-- inset img -->
+            <img src="pomegranate.png" title="Pomegranate" alt="Pomegranate" height="400px" style="margin-top:50px">
+            <br>
+            <!-- description -->
+            <b style="font-size: 45px">Pomegranate</b>
+            <p style="font-size: 30px;">10ct for $25</p>
+            <!-- input box -->
+            <span style="font-size:30px;background-color:rgb(44, 26, 13);color:aliceblue;">
+                Enter the quantity:  
+                <!-- number type input box -->
+                <input id=q3 style="width:50px;font-size:25px;" type="number" min="0" value=0>
+            </span>
+        </div>
+        <br>
+        <!-- the billing detail will shown below,first I gave the div an id -->
+        <div id="checkbg">
+            <!-- I put an button when user click on it,it will call to the function named checkout in the script section -->
+            <button id=check onclick="checkout()">Click to Checkout</button>
+            <!-- this is for the customer details -->
+            <span id="output"></span>
+            <!-- this is for the company details -->
+            <span id="output2"></span>
+        </div>
+        <div id="rule" style="margin-left:400px">
+            <img src=ways.png alt="Accepted paying ways" title="Accepted paying ways">
+            <!-- insert the shipping policy image-->
+            <img src="shipping.png" id="shipping" alt="shipping policy" title="shipping policy">
+        </div>
+    </body>
+</html>
